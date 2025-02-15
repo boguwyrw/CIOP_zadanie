@@ -14,23 +14,20 @@ public class PlayerController : MonoBehaviour
     private float lookDown = 50f;
     private float moveSpeed = 8f;
 
-    private void Start()
-    {
-        //Cursor.lockState = CursorLockMode.Locked;
-        //Cursor.visible = false;
-    }
-
     private void Update()
     {
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensivity * Time.deltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * mouseSensivity * Time.deltaTime;
+        if (!GameManager.Instance.IsGameEnded)
+        {
+            float mouseX = Input.GetAxis("Mouse X") * mouseSensivity * Time.deltaTime;
+            float mouseY = Input.GetAxis("Mouse Y") * mouseSensivity * Time.deltaTime;
 
-        CameraHeadRotation(mouseY);
-        PlayerBodyRotation(mouseX);
+            CameraHeadRotation(mouseY);
+            PlayerBodyRotation(mouseX);
 
-        PlayerMove();
+            PlayerMove();
 
-        PlayerOpenDoor();
+            PlayerOpenDoor();
+        }
     }
 
     private void CameraHeadRotation(float mouseY)

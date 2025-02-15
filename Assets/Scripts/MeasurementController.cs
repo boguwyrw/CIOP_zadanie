@@ -19,20 +19,18 @@ public class MeasurementController : MonoBehaviour
 
     public Door GetDoor { get { return door; } }
 
-    private void Start()
-    {
-
-    }
-
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.M))
+        if (!GameManager.Instance.IsGameEnded)
         {
-            AssignDoor();
-            currentDoorValue = door.DoorValue;
-            Debug.Log("Door value: " + currentDoorValue);
-            door.SetIsDoubleCheck(currentDoorValue);
-        }
+            if (Input.GetKeyDown(KeyCode.M))
+            {
+                AssignDoor();
+                currentDoorValue = door.DoorValue;
+                Debug.Log("Door value: " + currentDoorValue);
+                door.SetIsDoubleCheck(currentDoorValue);
+            }
+        }   
     }
 
     public void AssignDoor()

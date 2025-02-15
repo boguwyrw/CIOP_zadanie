@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
+    [SerializeField] private GameObject doorFire;
     [SerializeField] private float openDoorAngle = -90.0f;
 
     private int minDoorValue = 1;
@@ -21,11 +22,9 @@ public class Door : MonoBehaviour
 
     public int DoorValue { get { return doorValue; } }
 
-    public event Action OnDoorCheck;
-
     private void Start()
     {
-        OnDoorCheck?.Invoke();
+        doorFire.SetActive(false);
 
         doorValue = UnityEngine.Random.Range(minDoorValue, maxDoorValue + 1);
 
@@ -64,6 +63,8 @@ public class Door : MonoBehaviour
         }
         else
         {
+            doorFire.SetActive(true);
+            GameManager.Instance.PlayerLoseChance();
             Debug.Log("Drzwi plona");
         }
     }

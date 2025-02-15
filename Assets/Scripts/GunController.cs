@@ -19,14 +19,17 @@ public class GunController : MonoBehaviour
 
     private void Update()
     {
-        AdjustRingValue();
-        if (Input.GetMouseButtonDown(0))
+        if (!GameManager.Instance.IsGameEnded)
         {
-            if (adjustingRingSlider.value == measurementController.CurrentDoorValue)
+            AdjustRingValue();
+            if (Input.GetMouseButtonDown(0))
             {
-                measurementController.GetDoor.NeutralizedDoor();
+                if (adjustingRingSlider.value == measurementController.CurrentDoorValue)
+                {
+                    measurementController.GetDoor.NeutralizedDoor();
+                }
             }
-        }
+        }    
     }
 
     private void AdjustRingValue()
