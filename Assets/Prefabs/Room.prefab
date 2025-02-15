@@ -130,7 +130,7 @@ GameObject:
   - component: {fileID: 7861729321698223712}
   - component: {fileID: 178408950642543228}
   - component: {fileID: 8151912824881101476}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Roof
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -529,7 +529,7 @@ GameObject:
   - component: {fileID: 4934795688601351590}
   - component: {fileID: 3241645874327203952}
   - component: {fileID: 8202946144666675415}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}

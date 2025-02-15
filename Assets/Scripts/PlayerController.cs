@@ -14,6 +14,11 @@ public class PlayerController : MonoBehaviour
     private float lookDown = 50f;
     private float moveSpeed = 8f;
 
+    private void Start()
+    {
+        measurementController.GetPlayerHead(playerHead);
+    }
+
     private void Update()
     {
         if (!GameManager.Instance.IsGameEnded)

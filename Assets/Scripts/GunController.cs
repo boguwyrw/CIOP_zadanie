@@ -22,8 +22,9 @@ public class GunController : MonoBehaviour
         if (!GameManager.Instance.IsGameEnded)
         {
             AdjustRingValue();
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && !GameManager.Instance.IsPointerOverUIObject())
             {
+                measurementController.RoomCheck(adjustingRingSlider.value);
                 if (adjustingRingSlider.value == measurementController.CurrentDoorValue)
                 {
                     measurementController.GetDoor.NeutralizedDoor();

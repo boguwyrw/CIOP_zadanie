@@ -5,15 +5,19 @@ using UnityEngine;
 public class MeasurementController : MonoBehaviour
 {
     [SerializeField] private LayerMask doorLayerMask;
-    [SerializeField] private LayerMask wallLayerMask;
+    [SerializeField] private LayerMask roomLayerMask;
 
     [SerializeField] private Transform measuringDevice;
 
     private float deviceRange = 10.0f;
 
     private int currentDoorValue = -1;
+    private int allowedValue = 0;
+
 
     private Door door = null;
+
+    private Transform playerCameraHead;
 
     public int CurrentDoorValue { get { return currentDoorValue; } }
 
@@ -33,6 +37,11 @@ public class MeasurementController : MonoBehaviour
         }   
     }
 
+    public void GetPlayerHead(Transform cameraHead)
+    {
+        playerCameraHead = cameraHead;
+    }
+
     public void AssignDoor()
     {
         RaycastHit raycastHit;
@@ -43,6 +52,22 @@ public class MeasurementController : MonoBehaviour
         else
         {
             Debug.Log("Brak drzwi");
+        }
+    }
+
+    public void RoomCheck(float ringValue)
+    {
+        RaycastHit raycastHit;
+        if (Physics.Raycast(playerCameraHead.position, playerCameraHead.forward, out raycastHit, deviceRange, roomLayerMask))
+        { 
+            if ((int)ringValue == allowedValue)
+            {
+                Debug.Log(raycastHit.collider.gameObject.name);
+            }
+            else
+            {
+                Debug.Log("Bledna wartosc");
+            }
         }
     }
 }
