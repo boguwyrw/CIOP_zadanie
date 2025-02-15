@@ -20,6 +20,8 @@ public class Door : MonoBehaviour
 
     private Quaternion openDoor;
 
+    public bool IsDoubleCheck { get { return isDoubleCheck; } }
+
     public int DoorValue { get { return doorValue; } }
 
     private void Start()
@@ -42,7 +44,7 @@ public class Door : MonoBehaviour
     public void NeutralizedDoor()
     {
         doorValue = doorSafeValue;
-        Debug.Log("Zneutralizowano drzwi");
+        GameManager.Instance.ShowMeasurementResults("Door Neutralized");
     }
 
     public void SetIsDoubleCheck(int currentValue)
@@ -65,7 +67,7 @@ public class Door : MonoBehaviour
         {
             doorFire.SetActive(true);
             GameManager.Instance.PlayerLoseChance();
-            Debug.Log("Drzwi plona");
+            GameManager.Instance.ShowMeasurementResults("Bad Procedure");
         }
     }
 }

@@ -14,12 +14,15 @@ public class MeasurementController : MonoBehaviour
     private int currentDoorValue = -1;
     private int allowedValue = 0;
 
+    private bool canMeasureRoom = false;
 
     private Door door = null;
 
-    private Transform playerCameraHead;
+    private Transform playerCameraHead = null;
 
     public int CurrentDoorValue { get { return currentDoorValue; } }
+
+    public bool CanMeasureRoom { get { return canMeasureRoom; } }
 
     public Door GetDoor { get { return door; } }
 
@@ -31,8 +34,9 @@ public class MeasurementController : MonoBehaviour
             {
                 AssignDoor();
                 currentDoorValue = door.DoorValue;
-                Debug.Log("Door value: " + currentDoorValue);
+                GameManager.Instance.ShowMeasurementResults(currentDoorValue.ToString());
                 door.SetIsDoubleCheck(currentDoorValue);
+                canMeasureRoom = door.IsDoubleCheck;
             }
         }   
     }
@@ -51,22 +55,25 @@ public class MeasurementController : MonoBehaviour
         }
         else
         {
-            Debug.Log("Brak drzwi");
+            GameManager.Instance.ShowMeasurementResults("No Door");
         }
     }
 
     public void RoomCheck(float ringValue)
     {
-        RaycastHit raycastHit;
-        if (Physics.Raycast(playerCameraHead.position, playerCameraHead.forward, out raycastHit, deviceRange, roomLayerMask))
-        { 
-            if ((int)ringValue == allowedValue)
+        if (playerCameraHead != null && canMeasureRoom)
+        {
+            RaycastHit raycastHit;
+            if (Physics.Raycast(playerCameraHead.position, playerCameraHead.forward, out raycastHit, deviceRange, roomLayerMask))
             {
-                Debug.Log(raycastHit.collider.gameObject.name);
-            }
-            else
-            {
-                Debug.Log("Bledna wartosc");
+                if ((int)ringValue == allowedValue)
+                {
+                    GameManager.Instance.ShowMeasurementResults("Ok");
+                }
+                else
+                {
+                    GameManager.Instance.ShowMeasurementResults("Error");
+                }
             }
         }
     }

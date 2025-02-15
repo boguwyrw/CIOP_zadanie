@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject restartPanel;
 
     [SerializeField] private TMP_Text playerChancesText;
+    [SerializeField] private TMP_Text measurementResultsText;
 
     private int playerChances = 3;
 
@@ -34,6 +35,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         restartPanel.SetActive(false);
+        measurementResultsText.text = "";
         ShowPlayerChances();
     }
 
@@ -51,6 +53,11 @@ public class GameManager : MonoBehaviour
             isGameEnded = true;
             restartPanel.SetActive(true);
         }
+    }
+
+    public void ShowMeasurementResults(string result)
+    {
+        measurementResultsText.text = result;
     }
 
     public void RestartGame()
