@@ -61,7 +61,6 @@ public class Door : MonoBehaviour
         if (isDoubleCheck)
         {
             canOpenDoor = true;
-            Debug.Log("Otwarto drzwi");
         }
         else
         {

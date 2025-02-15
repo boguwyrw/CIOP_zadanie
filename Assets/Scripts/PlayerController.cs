@@ -62,7 +62,10 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F))
         {
             measurementController.AssignDoor();
-            measurementController.GetDoor.OpenDoor();
+            if (measurementController.GetDoor != null)
+            {
+                measurementController.GetDoor.OpenDoor();
+            }
         }
     }
 }

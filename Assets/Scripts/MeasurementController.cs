@@ -9,7 +9,7 @@ public class MeasurementController : MonoBehaviour
 
     [SerializeField] private Transform measuringDevice;
 
-    private float deviceRange = 10.0f;
+    private float deviceRange = 5.0f;
 
     private int currentDoorValue = -1;
     private int allowedValue = 0;
@@ -33,10 +33,18 @@ public class MeasurementController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.M))
             {
                 AssignDoor();
-                currentDoorValue = door.DoorValue;
-                GameManager.Instance.ShowMeasurementResults(currentDoorValue.ToString());
-                door.SetIsDoubleCheck(currentDoorValue);
-                canMeasureRoom = door.IsDoubleCheck;
+                if (door != null)
+                {
+                    currentDoorValue = door.DoorValue;
+                    GameManager.Instance.ShowMeasurementResults(currentDoorValue.ToString());
+                    door.SetIsDoubleCheck(currentDoorValue);
+                    canMeasureRoom = door.IsDoubleCheck;
+                    door = null;
+                }
+                else
+                {
+                    GameManager.Instance.ShowMeasurementResults("Point to Door");
+                }
             }
         }   
     }
@@ -49,14 +57,15 @@ public class MeasurementController : MonoBehaviour
     public void AssignDoor()
     {
         RaycastHit raycastHit;
-        if (Physics.Raycast(measuringDevice.position, measuringDevice.forward, out raycastHit, deviceRange, doorLayerMask))
+        if (Physics.Raycast(playerCameraHead.position, playerCameraHead.forward, out raycastHit, deviceRange, doorLayerMask))
         {
-            door = raycastHit.collider.gameObject.GetComponent<Door>();
+            door = raycastHit.collider.GetComponent<Door>();
         }
-        else
-        {
-            GameManager.Instance.ShowMeasurementResults("No Door");
-        }
+    }
+
+    public void ReleaseDoor()
+    {
+        door = null;
     }
 
     public void RoomCheck(float ringValue)
@@ -68,7 +77,16 @@ public class MeasurementController : MonoBehaviour
             {
                 if ((int)ringValue == allowedValue)
                 {
-                    GameManager.Instance.ShowMeasurementResults("Ok");
+                    BuildingComponent buildingComponent = raycastHit.collider.GetComponent<BuildingComponent>();
+                    if (!buildingComponent.HasBeenChecked)
+                    {
+                        GameManager.Instance.ShowMeasurementResults("Ok");
+                        buildingComponent.SetHasBeenChecked();
+                    }
+                    else
+                    {
+                        GameManager.Instance.ShowMeasurementResults("Checked");
+                    }
                 }
                 else
                 {

@@ -28,7 +28,16 @@ public class GunController : MonoBehaviour
                 bool isDoorNeutralized = !measurementController.CanMeasureRoom && adjustingRingSlider.value == measurementController.CurrentDoorValue;
                 if (isDoorNeutralized)
                 {
-                    measurementController.GetDoor.NeutralizedDoor();
+                    measurementController.AssignDoor();
+                    if (measurementController.GetDoor != null)
+                    {
+                        measurementController.GetDoor.NeutralizedDoor();
+                        measurementController.ReleaseDoor();
+                    }
+                    else
+                    {
+                        GameManager.Instance.ShowMeasurementResults("Point to Door");
+                    }
                 }
             }
         }    

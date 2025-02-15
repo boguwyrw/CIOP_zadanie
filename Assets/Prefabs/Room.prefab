@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: 7861729321698223712}
   - component: {fileID: 178408950642543228}
   - component: {fileID: 8151912824881101476}
+  - component: {fileID: 7471589272769650025}
   m_Layer: 8
   m_Name: Roof
   m_TagString: Untagged
@@ -223,6 +224,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7471589272769650025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2229465220501362992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d620c22e76513c84381f09504b2f04d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2236971448411138048
 GameObject:
   m_ObjectHideFlags: 0
@@ -390,6 +403,7 @@ GameObject:
   - component: {fileID: 5493310903412950574}
   - component: {fileID: 2044677091811657027}
   - component: {fileID: 71848499808919083}
+  - component: {fileID: 4681963989915051306}
   - component: {fileID: 2697922084642857610}
   m_Layer: 6
   m_Name: Wall_with_Door
@@ -505,6 +519,27 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.39999998, y: 2.2, z: 3}
   m_Center: {x: 0, y: 1.9, z: 1.5000004}
+--- !u!65 &4681963989915051306
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4166984786087747862}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.2, y: 1.6, z: 0.8}
+  m_Center: {x: 0, y: 0, z: 2.6}
 --- !u!114 &2697922084642857610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -529,6 +564,7 @@ GameObject:
   - component: {fileID: 4934795688601351590}
   - component: {fileID: 3241645874327203952}
   - component: {fileID: 8202946144666675415}
+  - component: {fileID: 9165782725327278444}
   m_Layer: 9
   m_Name: Floor
   m_TagString: Untagged
@@ -622,6 +658,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &9165782725327278444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5031888606572436693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d620c22e76513c84381f09504b2f04d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5205341422760909094
 GameObject:
   m_ObjectHideFlags: 0

@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TMP_Text measurementResultsText;
 
     private int playerChances = 3;
+    private int showResultsTime = 3;
 
     private bool isGameEnded = false;
 
@@ -44,6 +45,12 @@ public class GameManager : MonoBehaviour
         playerChancesText.text = playerChances.ToString();
     }
 
+    private IEnumerator CoClearResult()
+    {
+        yield return new WaitForSeconds(showResultsTime);
+        measurementResultsText.text = "";
+    }
+
     public void PlayerLoseChance()
     {
         playerChances--;
@@ -58,6 +65,7 @@ public class GameManager : MonoBehaviour
     public void ShowMeasurementResults(string result)
     {
         measurementResultsText.text = result;
+        StartCoroutine(CoClearResult());
     }
 
     public void RestartGame()
