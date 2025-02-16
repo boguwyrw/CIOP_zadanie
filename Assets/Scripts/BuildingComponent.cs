@@ -1,15 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class BuildingComponent : MonoBehaviour
+namespace ciop.task
 {
-    private bool hasBeenChecked = false;
-
-    public bool HasBeenChecked { get { return hasBeenChecked; } }
-
-    public void SetHasBeenChecked()
+    public class BuildingComponent : MonoBehaviour
     {
-        hasBeenChecked = true;
+        private bool hasBeenChecked = false;
+
+        public bool HasBeenChecked { get { return hasBeenChecked; } }
+
+        public void SetHasBeenChecked()
+        {
+            hasBeenChecked = true;
+        }
     }
 }

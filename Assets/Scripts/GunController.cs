@@ -1,50 +1,50 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class GunController : MonoBehaviour
+namespace ciop.task
 {
-    [SerializeField] private TMP_Text ringValueText;
-
-    [SerializeField] private Slider adjustingRingSlider;
-
-    [SerializeField] private MeasurementController measurementController;
-
-    private void Start()
+    public class GunController : MonoBehaviour
     {
-        AdjustRingValue();
-    }
+        [SerializeField] private TMP_Text ringValueText;
 
-    private void Update()
-    {
-        if (!GameManager.Instance.IsGameEnded)
+        [SerializeField] private Slider adjustingRingSlider;
+
+        [SerializeField] private MeasurementController measurementController;
+
+        private void Start()
         {
+            AdjustRingValue();
+        }
+
+        private void Update()
+        {
+            if (GameManager.Instance.IsGameEnded) return;
+
             AdjustRingValue();
             if (Input.GetMouseButtonDown(0) && !GameManager.Instance.IsPointerOverUIObject())
             {
                 measurementController.RoomCheck(adjustingRingSlider.value);
-                bool isDoorNeutralized = !measurementController.CanMeasureRoom && adjustingRingSlider.value == measurementController.CurrentDoorValue;
-                if (isDoorNeutralized)
-                {
-                    measurementController.AssignDoor();
-                    if (measurementController.GetDoor != null)
-                    {
-                        measurementController.GetDoor.NeutralizedDoor();
-                        measurementController.ReleaseDoor();
-                    }
-                    else
-                    {
-                        GameManager.Instance.ShowMeasurementResults("Point to Door");
-                    }
-                }
-            }
-        }    
-    }
 
-    private void AdjustRingValue()
-    {
-        ringValueText.text = adjustingRingSlider.value.ToString();
+                bool isDoorNeutralized = !measurementController.CanMeasureRoom && adjustingRingSlider.value == measurementController.CurrentDoorValue;
+                if (!isDoorNeutralized) return;
+
+                measurementController.AssignDoor();
+
+                if (measurementController.GetDoor == null)
+                {
+                    GameManager.Instance.ShowMeasurementResults("Point to Door");
+                    return;
+                }
+
+                measurementController.GetDoor.NeutralizedDoor();
+                measurementController.ReleaseDoor();
+            }
+        }
+
+        private void AdjustRingValue()
+        {
+            ringValueText.text = adjustingRingSlider.value.ToString();
+        }
     }
 }
